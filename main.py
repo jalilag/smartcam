@@ -3,14 +3,16 @@ from imageio import imread
 import numpy as n
 import matplotlib.pyplot as plt
 fd = face_detection()
-# fd.train("test/")
-res,_ = fd.load_data_paths()
-res = fd.read_img(res)
-print(n.shape(res))
-for i in range(14):
-	plt.figure()
-	plt.imshow(res[i,:,:,:])
-plt.show()
+# fd.read_img("img/f1.jpg")
+fd.train("test/")
+fd.predict("test/trump/1.jpg")
+# res,_ = fd.load_data_paths()
+# res = fd.read_img(res)
+# print(n.shape(res))
+# for i in range(14):
+# 	plt.figure()
+# 	plt.imshow(res[i,:,:,:])
+# plt.show()
 
 
 # fd.get_faces(imread("test/f3.jpg"),True,True)
