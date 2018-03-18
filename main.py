@@ -3,16 +3,16 @@ from imageio import imread
 import numpy as n
 import matplotlib.pyplot as plt
 import sys
-sys.path.insert(0,'../user_lib/')
-from user_sklearn import trainData
+from user_sklearn import Classification
 
 fd = face_detection()
 emb = face_embs()
-datax,datay,datal =  fd.data_dict_to_list(fd.load_data_paths())
+datax,datay,datal = fd.data_dict_to_list(fd.load_data_paths())
 datax = emb.get_embs(fd.read_img(datax))
-train = trainData(datax,datay)
-clf = train.try_model(model="ElasticNet",with_plot=True)
-print("pred",clf.predict(emb.get_embs(fd.read_img("img/f5.jpg"))))
+print(datay)
+train = Classification(datax,datay)
+clf = train.train_model(model="sgd",with_plot=True,fixed_params={"loss":"log"})
+print("pred",train.fitted_model.predict(emb.get_embs(fd.read_img("img/f5.jpg"))))
 # print(n.shape(trainx))
 # print(n.shape(trainx+testx))
 
